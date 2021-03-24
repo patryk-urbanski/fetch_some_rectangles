@@ -1,4 +1,4 @@
-export interface IItem {
+export interface IRectangle {
     id: string,
     color: string,
     rotation: number,
@@ -13,5 +13,5 @@ export interface IProject {
     name: string,
     width: number,
     height: number,
-    items: IItem[];
+    items: IRectangle[];
 }
