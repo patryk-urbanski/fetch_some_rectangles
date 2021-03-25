@@ -1,5 +1,3 @@
-import { IRectangle } from "../../types";
-
 interface ICornerCoordinates {
     pivotX: number,
     pivotY: number,

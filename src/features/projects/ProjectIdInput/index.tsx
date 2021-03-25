@@ -1,13 +1,37 @@
 import React, { FormEvent, useState } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+
+import { getRandomProjectId, getProjectDetails } from '../../../redux/methods/projects';
 
 import { Label, Input, Button, Form, Row} from 'reactstrap';
 
-const ProjectIdInput = () => {
+const mapDispatch = {
+    getRandomProjectId,
+    getProjectDetails,
+};
+
+const connector = connect(null, mapDispatch);
+
+type ReduxProps = ConnectedProps<typeof connector>
+
+const ProjectIdInput = ({
+    getRandomProjectId,
+    getProjectDetails,
+}: ReduxProps) => {
     const [ projectId, setProjectId ] = useState<string>('');
 
-    const handleOnSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleOnSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log(projectId)
+        
+        if(!projectId) {
+            const { id } = await getRandomProjectId();
+            if(id) {
+                getProjectDetails(id);
+            }
+        }
+        else {
+            getProjectDetails(projectId);
+        }
     };
 
     return (
@@ -31,9 +55,8 @@ const ProjectIdInput = () => {
                     </Button>
                 </Row>
             </Form>
-
         </div>
     )
 };
 
-export default ProjectIdInput;
+export default connector(ProjectIdInput);

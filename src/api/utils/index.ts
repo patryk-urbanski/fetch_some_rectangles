@@ -9,9 +9,6 @@ export const fetchFromApi = async ({
 }: Props ) => {
     const requestObject: any = {
         "method": httpMethod,
-        "headers": {
-            'Content-Type': 'application/json'
-        }
     }
 
     try {
@@ -32,7 +29,7 @@ export const fetchFromApi = async ({
             }
         } else if (response.status !== 200) {
             return {
-                httpError: response.statusText,
+                httpError: response.statusText || `It's ${response.status} status - thats all we know.`,
             };
         }
     } catch(error) {

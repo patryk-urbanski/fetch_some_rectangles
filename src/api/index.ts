@@ -1,17 +1,24 @@
 import { fetchFromApi } from './utils';
 
 const apiCalls = () => {
-    const getSectorPerformance = () => {
+    const getRandomProjectId = () => {
         return fetchFromApi({
-            path: "https://alpha-vantage.p.rapidapi.com/query?function=SECTOR",
-            httpMethod: "GET",
+            path: 'https://recruitment01.vercel.app/api/init',
+            httpMethod: 'GET',
         })
     };
 
+    const getProjectDetails = (id: string) => {
+        return fetchFromApi({
+            path: `https://recruitment01.vercel.app/api/project/${id}`,
+            httpMethod: 'GET',
+        })
+    };
 
     return {
-
+        getRandomProjectId,
+        getProjectDetails
     }
 };
 
-export default apiCalls;
+export const api = apiCalls();

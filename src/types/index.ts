@@ -10,8 +10,11 @@ export interface IRectangle {
 
 export interface IProject {
     id: string,
-    name: string,
-    width: number,
-    height: number,
-    items: IRectangle[];
+    project: {
+        id: string,
+        name: string,
+        width: number,
+        height: number,
+        items: IRectangle[]; 
+    }
 }
