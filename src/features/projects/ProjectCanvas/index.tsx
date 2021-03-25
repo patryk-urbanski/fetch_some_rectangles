@@ -21,8 +21,8 @@ const ProjectCanvas = ({
     isLoading,
 }: ReduxProps) => {
     const containerStyle = {
-        width: project?.width,
-        height: project?.height,
+        maxWidth: project?.width,
+        maxHeight: project?.height,
         border: '1px solid black',
         margin: '50px auto'
     };
@@ -36,7 +36,7 @@ const ProjectCanvas = ({
                         <span className='d-block'><strong>Name: </strong>{project.name}</span>
                         <span className='d-block'><strong>ID: </strong>{project.id}</span>
                     </div>
-                    <svg style={containerStyle}>
+                    <svg style={containerStyle} viewBox={`0 0 ${project.width} ${project.height}`} preserveAspectRatio="xMidYMid meet">
                         {
                             project.items.map((rectangle: IRectangle) => (
                                 <Rectangle { ...rectangle } key={`${rectangle.id}--rectangle`}/>
